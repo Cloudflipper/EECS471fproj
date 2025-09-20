@@ -13,6 +13,9 @@ The following chart shows the improvement of the performance
 | Layer1 | N/A |  3030   | 36.1  | 32.0  | 31.5  | 33.9  | 22.4  | 23.6  | 14  |
 | Layer2 | N/A |  11970  | 137.6 | 185.3 | 121.9 | 144.8 | 115.1 | 90.7  | 20  |
 | Total  | 200 |  15000  | 173.7 | 217.3 | 153.4 | 188.7 | 137.5 | 114.3 | 34  |
+
+
+
 All number are in unit ms. Req means requirement, starter means starter code, O means Optimization. O12 means optimization 1 and 2, O1~4means optimization 1~4, and so on. T means built-in Pytorch.
 
 ## 1.Multi-dimensional Parallelization
@@ -95,6 +98,8 @@ The optimized version explicitly writes all 49 filter position calculations, eli
 | Layer 1 |  N/A  |  0.0361  |   0.0315   |
 | Layer 2 |  N/A  |  0.1376  |   0.1219   |
 |  Total  | 0.20  |  0.1737  |   0.1534   |
+
+
 ### Remark
 In fact, we also attempted unrolling for the channel layer. However, tests showed that unrolling the channel layer did not contribute to improving the computational speed. Therefore, we abandoned this approach.
 
@@ -132,6 +137,8 @@ The 7×7 convolution kernel is manually unrolled into 49 operations. For each ou
 | Layer 1 |  N/A  |   0.0315   |    0.0339    |     0.0224        |
 | Layer 2 |  N/A  |   0.1219   |    0.1448    |       0.1151     |
 |  Total  | 0.20  |   0.1534   |    0.1887    |       0.1375     |
+
+
 Although adding Optimization 2 and Optimization 4 individually did not significantly improve the performance, combining both Optimization 2 and Optimization 4 led to a significant improvement.
 
 
